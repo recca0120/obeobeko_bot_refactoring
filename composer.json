@@ -1,0 +1,80 @@
+{
+    "name": "laravel/laravel",
+    "description": "The Laravel Framework.",
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
+    "license": "MIT",
+    "type": "project",
+    "repositories": [
+      {
+        "type": "vcs",
+        "url": "https://github.com/fukuball/no-captcha.git"
+      }
+    ],
+    "require": {
+        "php": ">=5.6.4",
+        "anhskohbo/no-captcha": "dev-master",
+        "caouecs/laravel-lang": "~3.0",
+        "doctrine/dbal": "^2.5",
+        "douyasi/locator": "~1.0",
+        "facebook/graph-sdk": "~5.0",
+        "guzzlehttp/guzzle": "^6.2",
+        "intervention/image": "^2.3",
+        "irazasyed/laravel-gamp": "^1.1",
+        "jenssegers/agent": "^2.4",
+        "jildertmiedema/laravel-plupload": "^0.4.1",
+        "laravel/framework": "5.4.8",
+        "laravel/passport": "^2.0",
+        "laravel/socialite": "^3.0",
+        "laravel/tinker": "~1.0",
+        "laravolt/avatar": "^1.8",
+        "league/flysystem-aws-s3-v3": "~1.0",
+        "mpociot/botman": "^1.4",
+        "nesbot/carbon": "^1.21",
+        "orangehill/iseed": "dev-master",
+        "sentry/sentry-laravel": "^0.6.0",
+        "spatie/laravel-permission": "^1.6",
+        "webpatser/laravel-uuid": "2.*"
+    },
+    "require-dev": {
+        "fzaninotto/faker": "~1.4",
+        "mockery/mockery": "0.9.*",
+        "phpunit/phpunit": "~5.7",
+        "squizlabs/php_codesniffer": "*"
+    },
+    "autoload": {
+        "classmap": [
+            "database"
+        ],
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "php artisan key:generate"
+        ],
+        "post-install-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postInstall",
+            "php artisan optimize"
+        ],
+        "post-update-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "php artisan optimize"
+        ]
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true
+    }
+}
