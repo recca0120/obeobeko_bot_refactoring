@@ -7,41 +7,52 @@ use Carbon\Carbon;
 class ObeobekoRepository
 {
     /**
+     * $obeobeok.
+     *
+     * @var \App\Obeobeko
+     */
+    protected $obeobeok;
+
+    /**
+     * __construct.
+     *
+     * @param \App\Obeobeko $obeobeok
+     */
+    public function __construct(Obeobeko $obeobeok)
+    {
+        $this->obeobeok = $obeobeok;
+    }
+
+    /**
      * Get empty content obeobeko.
      *
-     * @return obeobekos
+     * @return \Illuminate\Database\Eloquent\Collection
      */
-    public static function getEmptyContentObeobeko()
+    public function getEmptyContentObeobeko()
     {
-        $obeobekos = Obeobeko::where('content', '')
+        return $this->obeobeok->where('content', '')
                         ->whereDate('created_at', '<', Carbon::now()->subDay()->toDateString())
                         ->get();
-
-        return $obeobekos;
     }
 
     /**
      * Get obeobeko list.
      *
-     * @return obeobekos
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    public static function getObeobekoList()
+    public function getObeobekoList()
     {
-        $obeobekos = Obeobeko::where('content', '!=', '')->orderBy('created_at', 'desc');
-
-        return $obeobekos;
+        return $this->obeobeok->where('content', '!=', '')->orderBy('created_at', 'desc');
     }
 
     /**
      * Get random obeobeko.
      *
-     * @return obeobeko
+     * @return \App\Obeobeko
      */
-    public static function getRandomObeobeko()
+    public function getRandomObeobeko()
     {
-        $obeobeko = Obeobeko::where('content', '!=', '')->inRandomOrder()->first();
-
-        return $obeobeko;
+        return $this->obeobeok->where('content', '!=', '')->inRandomOrder()->first();
     }
 
     /**
@@ -49,13 +60,11 @@ class ObeobekoRepository
      *
      * @param string $query
      *
-     * @return obeobekos
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    public static function search($query)
+    public function search($query)
     {
-        $obeobekos = Obeobeko::where('content', 'like', '%'.$query.'%')
+        return $this->obeobeok->where('content', 'like', '%'.$query.'%')
                         ->orderBy('created_at', 'desc');
-
-        return $obeobekos;
     }
 }
